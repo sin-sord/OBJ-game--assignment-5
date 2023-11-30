@@ -21,9 +21,11 @@ class Obstacle {
 
     OBSleft=false;
     OBSright=false;
+
   }
 
   void ObstacleMove() {
+    print(OBSPosition1);
     OBSPosition1.add(OBSSpeed1);
     if (OBSPosition1.x < -50) {
       OBSPosition1.x = 1900;
@@ -85,4 +87,6 @@ class Obstacle {
       OBSright = false;
     }
   }
+
+
 }

@@ -5,6 +5,8 @@ Road RD = new Road();
 Obstacle OBS = new Obstacle();
 Poll PL = new Poll();
 
+PVector random2D;
+
 
 void setup() {
   size(1850, 800);
@@ -12,6 +14,7 @@ void setup() {
     xpos[i]=0;
     ypos[i]=0;
   }
+  random2D = new PVector (random(700, 750), random(20, 25));
 }
 
 
@@ -19,7 +22,10 @@ void setup() {
 void draw() {
   //draws the background
   background(0);
- 
+  noStroke();
+  fill(255);
+  ellipse(random2D.x, random2D.y, 350, 350);
+
   //---------------------------------------------------------The Road
   RD.roadDraw();
 

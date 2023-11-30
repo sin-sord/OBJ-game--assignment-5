@@ -31,7 +31,6 @@ class Player { // identifies that Player is a class with its own code
 
   // the player and what they control
   void PLYRavatar() { //draws the player and has the controls implemented into it
-print(location);
 
     //shadow under the car
     noStroke();

@@ -1,4 +1,4 @@
-float[] wallSize = {10, 20, 30, 40, 50};
+float[] wall3D = {10, 20, 30, 40, 50};
 
 class Wall {
 
@@ -9,16 +9,16 @@ class Wall {
     //draws the wall
     stroke(0);
     fill(#580B0D);
-    rect(0, 45, width, wallSize[4]);
+    rect(0, wall3D[4], width, wall3D[3]);
     // shading under the top of the wall
     noStroke();
     fill(#400C0E);
-    rect(0, 45, width, wallSize[2]);
+    rect(0, wall3D[3], width, 30);
 
     //draws the top side of the wall
     stroke(0);
-    fill(#861A1D);
-    rect(0, 40, width, wallSize[1]);
+    fill(#621214);
+    rect(0, 40, width, wall3D[1]);
 
     //draws the top of the wall
     fill(#861A1D);
@@ -35,11 +35,6 @@ class Wall {
     //  rect(map((frameCount*3.2)%2800, -100, 2800, 2800, -100), -55, 30, 150);
     // rect(map((frameCount*3.2)%3200, -100, 3200, 3200, -100), -55, 30, 150);
   }
-
-
-
-
-
 
   void frontWall() {
     //light post(front wall)
@@ -64,7 +59,7 @@ class Wall {
 
     //draws the top side of the wall
     stroke(0);
-    fill(#861A1D);
+    fill(#621214);
     rect(0, 490, width, 20);
 
     //draws the top of the wall

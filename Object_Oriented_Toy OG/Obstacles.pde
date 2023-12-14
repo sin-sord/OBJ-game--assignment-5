@@ -16,24 +16,27 @@ PVector collisionLocation1;
 PVector collisionSpeed;
 
 class Obstacle {
+  // sets the class "Obstacle"
 
   public Obstacle() {
-
+    // sets the length and width of the barrel
     barrelTop = 45;
     barrelBottom = 40;
 
+// uses PVector to know the speed and position of the barrel
     OBSPosition1 = new PVector (1900, 275);
-    OBSSpeed1 = new PVector (-7, 0);
+    OBSSpeed1 = new PVector (-5.5, 0);
 
     OBSleft=false;
     OBSright=false;
 
     collisionLocation1 = new PVector (0, 300);
-    collisionSpeed = new PVector (-7, 0);
+    collisionSpeed = new PVector (-5.5, 0);
   }
 
   void ObstacleMove() {
-    //   print("OBS1 Location: " + OBSPosition1.x);
+    // if the obstacle reaches -50 on the x-axis then it resets its x position between 1900 to 1955
+    // if the obstalce reaches -50 then it resets randomly between 100 to 400 on the y-axis
     OBSPosition1.add(OBSSpeed1);
     if (OBSPosition1.x < -50) {
       OBSPosition1.x = random(1900, 1955);
@@ -49,7 +52,7 @@ class Obstacle {
     }
   }
 
-  void drawObstacle1() {
+  void drawObstacle1() { // draws the barrel
     //barrel base
     fill(#8E7F7F);
     stroke(0);
@@ -57,7 +60,7 @@ class Obstacle {
     noFill();
     //border of barrel
     stroke(#FEFF00);
-    rect(collisionLocation1.x, collisionLocation1.y+25, 45, 40);
+  //  rect(collisionLocation1.x, collisionLocation1.y+25, 45, 40);
   }
 
 

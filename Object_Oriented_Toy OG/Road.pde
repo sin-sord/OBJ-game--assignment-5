@@ -1,7 +1,7 @@
 
-class Road {
+class Road { // sets the class "Road"
 
-  void roadDraw() {
+  void roadDraw() { // draws the road that the player drives on
     // draws the road
     stroke(0);
     fill(150);

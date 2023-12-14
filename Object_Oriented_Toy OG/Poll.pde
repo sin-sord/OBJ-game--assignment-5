@@ -4,13 +4,11 @@ PVector pollSpeed1;
 boolean PollLeft;
 boolean PollRight;
 
-ArrayList<Poll> Snow = new ArrayList<Poll>();
-
 color fillLight;
 
-class Poll {
+class Poll { // sets the class "Poll"
 
-  public Poll() {
+  public Poll() { // uses PVecotr to know the position and speed of the poll
     //Barrel 1
     pollPosition1 = new PVector (0, 300);
     pollSpeed1 = new PVector (-8, 0);
@@ -20,6 +18,8 @@ class Poll {
   }
 
   void pollMove() {
+    // the position of the poll is added by the speed of the poll, if the poll reaches -180 on the x-axis
+    // then it resets its position to 2000 on the x-axis
     pollPosition1.add(pollSpeed1);
     if (pollPosition1.x < - 180) {
       pollPosition1.x=2000;
@@ -28,6 +28,7 @@ class Poll {
 
 
   void drawPoll1() {
+    //draws the poll and sets its X and Y to the PVector
     //front light post
     ellipseMode(CENTER);
     noStroke();

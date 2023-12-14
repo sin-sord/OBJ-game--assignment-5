@@ -279,106 +279,113 @@ class Player { // identifies that Player is a class with its own code
 
 
   void keyPressed() {  //when the key is pressed, the player will move in that direction
-    if (key == ' ') {
+    if (key == 'r' && gameOver) {
       if (gameOver) {
-        PLYR.reset();
+        reset();
+      }
+    }
+    frameRate(100);
+    if (key == 'w') {
+      PL1moveUp = true;
+    }
+    if (key == 's') {
+      PL1moveDown = true;
+    }
+    if (key == 'a') {
+      PL1moveLeft = true;
+    }
+    if (key == 'd') {
+      PL1moveRight = true;
+    }
+    if (keyCode == 'r') {
+      if (gameOver) {
+        reset();
         gameOver = false;
       }
     }
-      frameRate(100);
-      if (key == 'w') {
-        PL1moveUp = true;
-      }
-      if (key == 's') {
-        PL1moveDown = true;
-      }
-      if (key == 'a') {
-        PL1moveLeft = true;
-      }
-      if (key == 'd') {
-        PL1moveRight = true;
-      }
-      if (keyCode == 'r') {
-        if (gameOver) {
-          reset();
-          gameOver = false;
-        }
-      }
-      // sets the value of location dpending on speed
-      if (PL1moveUp == true) {
-        location.y -= PL1speed.y;
-        hitbox.y -= PL1speed.y;
-      }
-      if (PL1moveDown == true) {
-        location.y += PL1speed.y;
-        hitbox.y += PL1speed.y;
-      }
-      if (PL1moveLeft == true) {
-        location.x -= PL1speed.x;
-        hitbox.x -= PL1speed.x;
-      }
-      if (PL1moveRight == true) {
-        location.x += PL1speed.x;
-        hitbox.x += PL1speed.x;
-      }
+    // sets the value of location dpending on speed
+    if (PL1moveUp == true) {
+      location.y -= PL1speed.y;
+      hitbox.y -= PL1speed.y;
+    }
+    if (PL1moveDown == true) {
+      location.y += PL1speed.y;
+      hitbox.y += PL1speed.y;
+    }
+    if (PL1moveLeft == true) {
+      location.x -= PL1speed.x;
+      hitbox.x -= PL1speed.x;
+    }
+    if (PL1moveRight == true) {
+      location.x += PL1speed.x;
+      hitbox.x += PL1speed.x;
+    }
+  }
+
+
+
+  // If the key is released then the player will move without having the key being held
+  void keyReleased() {
+    if (key == 'w') {
+      PL1moveUp = false;
+    }
+    if (key == 's') {
+      PL1moveDown = false;
+    }
+    if (key == 'a') {
+      PL1moveLeft = false;
+    }
+    if (key == 'd') {
+      PL1moveRight = false;
+    }
   }
 
 
+  // this makes sure that the player stays within a certain area on the canvas
+  void Bound() {
+    location.x = constrain(location.x, 10, width-xBound);
+    location.y = constrain(location.y, 100, height-yBound);
 
-    // If the key is released then the player will move without having the key being held
-    void keyReleased() {
-      if (key == 'w') {
-        PL1moveUp = false;
-      }
-      if (key == 's') {
-        PL1moveDown = false;
-      }
-      if (key == 'a') {
-        PL1moveLeft = false;
-      }
-      if (key == 'd') {
-        PL1moveRight = false;
-      }
-    }
+    hitbox.x = constrain(hitbox.x, 10, width-xBound);
+    hitbox.y = constrain(hitbox.y, 100, height-yBound);
+  }
+
+  void reset() {
+    gameOver = false;
+    PLYRavatar();
+    collision();
+  }
 
 
-    // this makes sure that the player stays within a certain area on the canvas
-    void Bound() {
-      location.x = constrain(location.x, 10, width-xBound);
-      location.y = constrain(location.y, 100, height-yBound);
+  // help from this video: https://www.youtube.com/watch?v=0IAuJDzfyQo
+  void collision() {
+    //this will detect a collision between the obstacle and player and will show a "Game Over" screen
+    float playerTop = location.y - 25;
+    float playerBottom = location.y;
+    float playerLeft = location.x - 5;
+    float playerRight = location.x + 125;
 
-      hitbox.x = constrain(hitbox.x, 10, width-xBound);
-      hitbox.y = constrain(hitbox.y, 100, height-yBound);
-    }
+    float obstacleTop = OBSPosition1.y;
+    float obstacleBottom = OBSPosition1.y + 65;
+    float obstacleLeft = OBSPosition1.x;
+    float obstacleRight = OBSPosition1.x + 45;
+    
+    if((playerTop <= obstacleBottom && playerBottom >= obstacleTop) && (playerLeft <= obstacleRight && playerRight >= obstacleLeft)) {
 
-    void reset() {
-      gameOver = false;
-      PLYRavatar();
-      collision();
-    }
+      gameOver = true; // if the player hits the obstacle then the game is over
 
-
-    // help from this video: https://www.youtube.com/watch?v=0IAuJDzfyQo
-    void collision() {   //this will detect a collision between the obstacle and player
-      float playerboxX = location.x;
-      float playerboxY =  location.y;
-      float obstacleX  = OBSPosition1.x;
-      float obstacleY = OBSPosition1.y;
-      print((playerboxY + height/2) > ( obstacleY  + height/2+30));
-      if ((playerboxX - height/2) > ( obstacleX  - height/2) && (playerboxY + height/2) < ( obstacleY  + height/2) && (playerboxX - height/2) < (obstacleX + height/2) && (playerboxY + height/2) < (obstacleY + height/2)) {
-        gameOver = true;
-        fill(255, 90);
-        stroke(0);
-        strokeWeight(1.5);
-        rect(100, 100, 700, 400);
-        fill(255);
-        textSize(80);
-        text("GAME OVER", 270, 360);
-        fill(0, 255, 60);
-        textSize(50);
-        text("reload the page to replay", 200, 450);
-        stop();
-        print("    true  " + obstacleY);
-      }
+      fill(255, 90);
+      stroke(0);
+      strokeWeight(1.5);
+      rect(100, 100, 700, 400);
+      fill(255);
+      textSize(80);
+      text("GAME OVER", 270, 360);
+      fill(0, 255, 60);
+      textSize(50);
+      text("reload the page to replay", 200, 450);
+      stop();
+      //        print("    true  " + obstacleY);
     }
   }
+}

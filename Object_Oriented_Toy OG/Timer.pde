@@ -22,7 +22,7 @@
 float timer;
 float set;
 float getTime;
-class time {
+class time { // sets the class "time" to keep track of how long the player survives for
 
   public time(float set) {
     timer = set;
@@ -34,7 +34,7 @@ class time {
   void setTime(float set) {
     timer = set;
   }
-  void timeCount() {
+  void timeCount() { // sets the time to increase by 1 frame, so by 1 second
     timer +=1/frameRate;
   }
 }
